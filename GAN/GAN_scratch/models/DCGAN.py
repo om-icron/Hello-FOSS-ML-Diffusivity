@@ -81,8 +81,8 @@ for epoch in range(epochs):
         d_loss_real.backward()
 
         z = torch.randn(batch_size0, latent_dim, 1, 1, device=device)
-        fake_image = generator(z).detach()
-        d_loss_fake = criterion(discriminator(fake_image), torch.zeros(batch_size0, 1, device=device))
+        fake_image = generator(z)
+        d_loss_fake = criterion(discriminator(fake_image.detach()), torch.zeros(batch_size0, 1, device=device))
         d_loss_fake.backward()
 
         optimizer_d.step()
